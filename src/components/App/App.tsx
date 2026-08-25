@@ -23,8 +23,6 @@ const ReactPaginate = (
 export default function App() {
   const [query, setQuery] = useState<string>('')
   const [currentPage, setCurrentPage] = useState<number>(1)
-  // const [totalPages, setTotalPages] = useState<number>(1)
-  // const [movies, setMovies] = useState<Movie[]>([])
   const [movie, setMovie] = useState<Movie | null>(null)
 
   const { data, isError, isLoading } = useQuery({
@@ -39,16 +37,11 @@ export default function App() {
     if (data?.results && data.results.length < 1) {
           toast.error('No movies found for your request.')
       }
-  },)
+  }, [data])
 
   const handleSearch = async (query: string) => {
     setQuery(query)
     setCurrentPage(1)
-    // console.log(query);
-    // const data = await fetchMovies(query, currentPage)
-    // setTotalPages(data.total_pages)
-    // console.log(data);
-    // setMovies(data.results ?? [])
     
   }
   const handleImageClick = (movie: Movie) => {
