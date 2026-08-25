@@ -3,9 +3,9 @@ import type {Movie} from "../types/movie";
 
 const myKey = import.meta.env.VITE_API_KEY;
 
-interface Response {
+export default interface Response {
     results: Movie[]
-    total_page: number
+    total_pages: number
 }
 
 export const fetchMovies = async (query: string, page: number): Promise<Response> => {
@@ -13,7 +13,7 @@ export const fetchMovies = async (query: string, page: number): Promise<Response
     const  result  = await axios.get<Response>("https://api.themoviedb.org/3/search/movie", {
         params: {
             query: query,
-            page: 1,
+            page: page,
         },
         headers: {
             Authorization: `Bearer ${myKey}`
@@ -30,7 +30,7 @@ export const fetchMovies = async (query: string, page: number): Promise<Response
         return (
             {
                 results: [],
-                total_page: 0
+                total_pages: 0
             }
         )
             }
